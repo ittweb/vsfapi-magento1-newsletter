@@ -1,6 +1,6 @@
 /*
-  Questa estensione richiede l'installazione del modulo magento1-newsletter presente su repository privato git:
-  http://git.ittweb.net/gitlist/magento1-newsletter/
+  This extension require the installation of the Magento 1 module:
+  https://github.com/ittweb/magento1-newsletter/
 */
 import { apiStatus } from '../../../lib/util'
 import { Router } from 'express'
@@ -18,7 +18,7 @@ module.exports = ({ config }) => {
     }, (error, result, body) => {
       if (error || result.statusCode !== 200) {
         console.error(error, body)
-        apiStatus(response, `Risultato Magento 1: ${result.statusCode}`, result.statusCode)
+        apiStatus(response, `Result on Magento 1: ${result.statusCode}`, result.statusCode)
       } else {
         apiStatus(response, body.status, 200)
       }
@@ -27,19 +27,19 @@ module.exports = ({ config }) => {
 
   const reCaptchaCheck = (action, userEmail, recaptchaToken, res) => {
     if (!userEmail) {
-      return apiStatus(res, 'Email obbligatoria', 500)
+      return apiStatus(res, 'Email required', 500)
     }
 
     if (config.googleRecaptcha) {
       if (config.googleRecaptcha.enabled === true) {
         
         if (!recaptchaToken) {
-          return apiStatus(res, 'Google reCaptcha non compilato', 500)
+          return apiStatus(res, 'Google reCaptcha not submitted', 500)
         }
   
         const recaptchaSecretKey = config.googleRecaptcha.secretKey
         if (!recaptchaSecretKey) {
-          return apiStatus(res, 'La chiave segreta del Google reCaptcha non è stata fornita!', 500)
+          return apiStatus(res, 'The Google reCaptcha secret key is not available!', 500)
         }
   
         request({
@@ -51,7 +51,7 @@ module.exports = ({ config }) => {
           } else {
             const jsonRes = JSON.parse(response.body)
             if (jsonRes.success === false) {
-              return apiStatus(res, `Errore sul Google reCaptcha: ${jsonRes['error-codes'][0]}`, 500)
+              return apiStatus(res, `Error on Google reCaptcha: ${jsonRes['error-codes'][0]}`, 500)
             }
           }
         })
@@ -73,7 +73,7 @@ module.exports = ({ config }) => {
     }, (error, result, body) => {
       if (error || result.statusCode !== 200) {
         console.error(error, body)
-        apiStatus(res, `Risultato Magento 1: ${result.statusCode}`, result.statusCode)
+        apiStatus(res, `Result on Magento 1: ${result.statusCode}`, result.statusCode)
       } else {
         apiStatus(res, 'subscribed', 200)
       }

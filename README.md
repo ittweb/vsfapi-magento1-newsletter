@@ -1,19 +1,18 @@
 # vsfapi-magento1-newsletter
 Questo modulo abilita su Vue Storefront API l'aggiunta dell'iscrizione alla newsletter su Magento 2.
 
-## Installazione
-Prima di usare questo modulo **installare la relativa versione per Magento 1** su repo ITTweb:
-http://git.ittweb.net/gitlist/magento1-newsletter/
+## Installation
+This module **require the installation of the Magento 1 module**:
+https://github.com/ittweb/magento1-newsletter/
 
-Dopo aver **installato il modulo per Magento 1**:
- - scarica il file della directory src nella root del progetto Vue Storefront API
- - modifica il file `vue-storefront-api/config/local.json` aggiungendo `magento1-subscribe` in `registeredExtensions`
- - modifica il `vue-storefront/config/local.json` cambiando l'endpoint della newsletter in `/api/ext/magento1-subscribe/subscribe`
-
-Ora la newsletter di VSF-API è correttamente associata a Magento 1.
+After the **installation of the Magento 1 module**:
+ - download the file on the /src directory, on the root of your Vue Storefront API project
+ - modify the `vue-storefront-api/config/local.json` file, adding `magento1-subscribe` to the `registeredExtensions`
+ - modify the `vue-storefront/config/local.json` file, changing the newsletter endpoint in `/api/ext/magento1-subscribe/subscribe`
+ - restart `yarn dev` on `vue-storefront` and `vue-storefront-api`
 
 ## Google reCaptcha
-Per evitare potenziali attacchi agli ENDPOINT **abilita il Google reCaptcha**. Per abilitarlo, modifica il file vue-storefront-api/config/local.json aggiungendo una sezione come la seguente:
+Is strongly recommended to **enable the Google reCaptcha**. To do so, modify the vue-storefront-api/config/local.json file, adding this section:
 ```
 "googleRecaptcha": {
     "enabled": true,
@@ -21,10 +20,10 @@ Per evitare potenziali attacchi agli ENDPOINT **abilita il Google reCaptcha**. P
 },
 ```
 
-### IMPORTANTE
-Se **abiliti il Google reCaptcha DEVI aggiungere** un nuovo request body **parameter** chiamato `token`.
-Il parametro `token` **DEVE contenere il grecaptcha.getResponse()** oltre al Google reCaptcha e va aggiunto al parametro `email` ai vari endpoint:
+### IMPORTANT
+If you **enable the Google reCaptcha you MUST** add a request body **parameter** called `token`.
+The `token` parameter **MUST contain the grecaptcha.getResponse()** and the `email` parameter must been sended to the endpoint:
 
 `vue-storefront-api-url/api/ext/magento1-subscribe/`
 
-Puoi trovare queste funzioni nella tua installazione `vue-storefront`, file `core/data-resolver/NewsletterService.ts`, funzioni `subscribe` e `unsubscribe`.
+You can find those on `vue-storefront/core/data-resolver/NewsletterService.ts`, functions `subscribe` and `unsubscribe`.
