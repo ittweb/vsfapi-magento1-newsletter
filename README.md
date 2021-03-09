@@ -28,5 +28,5 @@ The `token` parameter **MUST contain the grecaptcha.getResponse()** and the `ema
 
 You can find those on `vue-storefront/core/data-resolver/NewsletterService.ts`, functions `subscribe` and `unsubscribe`.
 
-### Magento 2
+## Other version
 The same module is available on Github for [Magento 2](https://github.com/ittweb/vsfapi-magento2-newsletter/).
