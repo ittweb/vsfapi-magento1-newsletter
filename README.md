@@ -1,6 +1,4 @@
 # vsfapi-magento1-newsletter
-Questo modulo abilita su Vue Storefront API l'aggiunta dell'iscrizione alla newsletter su Magento 2.
-
 ## Installation
 This module **require the installation of the Magento 1 module**:
 https://github.com/ittweb/magento1-newsletter/
